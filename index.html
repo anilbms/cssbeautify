@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>CSS Beautify</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="Content-Language" content="en"/>
+    <title>CSS Beautify - align CSS properties vertically</title>
+    <meta name="title" content="CSS Beautify - align CSS properties vertically"/>
+	<meta name="description" content="Demo of CSS Beautify with align css properties by Anil Kumar Krishnashetty, forked from http://github.com/senchalabs/cssbeautify"/>
+	<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACaklEQVQ4T3VTPUhyURh+TMisDNNCKEUpGhzCoaXBTRpdncJAC20JBydBsCKFhsYyrBRtDVxchUChoQZRiUJ00owS1CDUfk6+L99yke/A8eK99zy/75Xh30okEqLT6WBqagpCCPz+/kIul/PTr68vKJVKvt/tdvH+/o7Dw0MZPeMfWmdnZ0Imk+H4+BgajQZvb29QKBQg0PHxcfh8PqhUKoyNjYHec7vdUoDLy8shgcDBwQEWFhZQr9fR6/VYCW16NjMzg2AwyADb29ujANVqFYVCAfPz82i1Wpibm0Mul2PJPz8/rHRvbw9Go3EU4Pz8XFQqFWZrt9uYmJiATqdjK8ViEeVymbMg9nA4jN3dXamCi4sLQS8uLi4yCHn9/v7G6+srHh8f8fz8zJb6/T4ikQi8Xq8UgFrw+/182Ol0Ip1Ocx7JZJLlkzVqgnYgEIDL5ZICxGIxEQqFWPrOzg5OT0+ZjZqwWCx4eHhgBZOTk9jf3x9tgSxQQCSPGOnw9fU1bDYbg2SzWbbXaDSYwOPxSBVEo1FBnil96nt6epoDozmo1Wq4u7uD3W5Hs9mE1WrF5ubmqIWPjw8+RD5LpRLMZjM+Pz/x9PSE2dlZ6PV6noWXlxfKQQrgcDgETdzS0hLXSFdiHwwG7J9U0P2jo6P/TyL1nMlkmEWr1fI00qZgDQYDN3NycsIVj4xyPB4XZCGVSnEOZIXCM5lMWF5eZtn5fB4rKyvY2toaBRj2La6urrCxsYGbmxsQ2JCFJ1GtVvNhskj/aSqHX6U0g7W1NUG+iXl9fZ2nkBZ9RGTt/v4eq6uruL295ekcBssAf08xXSD9ByGIAAAAAElFTkSuQmCC" type="image/x-icon">
     <script src="assets/thirdparty/codemirror.js" charset="utf-8"></script>
     <script src="assets/thirdparty/css.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="assets/thirdparty/codemirror.css"/>
+  	<link rel="stylesheet" type="text/css" href="assets/thirdparty/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="assets/style.css"/>
     <script src="cssbeautify.js" charset="utf-8"></script>
     <script src="assets/format.js" charset="utf-8"></script>
@@ -13,67 +18,75 @@
 <body>
 <div class="container">
 
-    <h1>CSS Beautify <small>automatically formats your style to be consistent and easy to read</small></h1>
-    <ul>
-        <li>Only one blank line between two rulesets</li>
-        <li>Closed curly brace is at its own line</li>
-        <li>There is no empty line between declarations inside a ruleset</li>
-        <li>No space between the property name and colon</li>
-        <li>One space between colon and the property value</li>
-        <li>Comments are preserved</li>
-    </ul>
+    <h1>CSS Beautify <small>With Align css properties vertically</small></h1>
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="row">
+    			<div class="col-md-12 beautify-options">
+    				<h3>Options</h3>
+		    		<div class="row">
+		    			<div class="col-md-3">
+		    				<h4>Indent with:</h4>
+		    			</div>
+		    			<div class="col-md-2">
+		    				<label><input checked type="radio" name="indent" id="fourspaces" value="fourspaces" onChange='format()'> 4 spaces</label>
+		    			</div>
+		    			<div class="col-md-2">
+		    				<label><input type="radio" name="indent" id="twospaces" value="twospaces" onChange='format()'> 2 spaces</label>
+		    			</div>
+		    			<div class="col-md-3">
+		    				<label><input type="radio" name="indent" id="tab" value="tab" onChange='format()'> tab</label>
+		    			</div>
+		    		</div>
+		    		<div class="row">
+		    			<div class="col-md-3">
+		    				<h4>Open curly brace:</h4>
+		    			</div>
+		    			<div class="col-md-2">
+		    				<label><input checked type="radio" name="openbrace" id="openbrace-end-of-line" onChange='format()'> end of line</label>
+		    			</div>
+		    			<div class="col-md-2">
+		    				<label><input type="radio" name="openbrace" id="openbrace-separate-line" onChange='format()'> separate line</label>
+		    			</div>
+		    		</div>
+		    		<div class="row">
+		    			<div class="col-md-3"></div>
+						<div class="col-md-2">
+							<label><input checked type="checkbox" name="autosemicolon" id="autosemicolon" onChange='format()'> Automatic semicolon</label>
+						</div>
+						<div class="col-md-2">
+							<label><input checked type="checkbox" name="alignProperties" id="alignProperties" onChange='format()'> Align properties</label>
+						</div>
+    				</div>
+    			</div>
+    		</div>
+    		 <div class="row">
+    			<div class="col-md-6 raw">
+			        <h3>Type any unformatted CSS:</h3>
+			        <textarea id="raw" rows="22" autofocus="autofocus" spellcheck="false" onChange='format()' onKeyDown='format()'>menu{color:red} navigation{background-color:#333;color:red /* darkgrey */}</textarea>
+			    </div>
 
-    <p>For a command-line use, install Node.js <a href="https://npmjs.org/package/cssbeautify">cssbeautify package</a>.</p>
-
-    <div class="raw">
-        <h3>Type any unformatted CSS:</h3>
-        <textarea id="raw" rows="22" autofocus="autofocus" spellcheck="false" onChange='format()' onKeyDown='format()'>menu{color:red} navigation{background-color:#333 /* darkgrey */}</textarea>
+			    <div class=" col-md-6 formatted">
+			        <h3>Beautified CSS:</h3>
+			        <textarea id="beautified" rows="22" readonly></textarea>
+			    </div>
+    		</div>
+    	</div>
     </div>
+    <div class="footer"><strong>Forked from CSS Beautify,</strong> is an open-source project from <a href="http://senchalabs.org">Sencha Labs</a>.<br>Check the repository at <a href="http://github.com/senchalabs/cssbeautify">github.com/senchalabs/cssbeautify</a>.</div>
 
-    <div class="formatted">
-        <h3>Beautified CSS:</h3>
-        <textarea id="beautified" rows="22" readonly></textarea>
-    </div>
-
-    <div class="options">
-        <h3>Options:</h3>
-        <p>Indent with<br>
-        <label><input checked type="radio" name="indent" id="fourspaces" value="fourspaces" onChange='format()'>4 spaces</label><br>
-        <label><input type="radio" name="indent" id="twospaces" value="twospaces" onChange='format()'>2 spaces</label><br>
-        <label><input type="radio" name="indent" id="tab" value="tab" onChange='format()'>tab</label>
-        </p>
-        <p>Open curly brace:<br>
-        <label><input checked type="radio" name="openbrace" id="openbrace-end-of-line" onChange='format()'>end of line</label><br>
-        <label><input type="radio" name="openbrace" id="openbrace-separate-line" onChange='format()'>separate line</label>
-        </p>
-        <p><label><input checked type="checkbox" name="autosemicolon" id="autosemicolon" onChange='format()'>Automatic semicolon</label></p>
-        <p><label><input type="checkbox" name="alignProperties" id="alignProperties" onChange='format()'>Align properties</label></p>
-    </div>
-
-    <br clear="all"/>
-    <div class="footer"><strong>CSS Beautify</strong> is an open-source project from <a href="http://senchalabs.org">Sencha Labs</a>.<br>Check the repository at <a href="http://github.com/senchalabs/cssbeautify">github.com/senchalabs/cssbeautify</a>.</div>
-
-  <p><a href="http://github.com/senchalabs/cssbeautify"><img style="position: absolute; top: 0; right: 0; border: 0;" src="images/ribbon.png" alt="Fork me on GitHub"></a></p>
+  <p><a href="http://github.com/anilbms/cssbeautify"><img style="position: absolute; top: 0; right: 0; border: 0;" src="images/ribbon.png" alt="Fork me on GitHub"></a></p>
   </div>
-
   <script type="text/javascript">
+	
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    if ('senchalabs.github.com' == document.location.hostname) {
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-1396058-12']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    }
-
+	  ga('create', 'UA-41207163-1', 'anilkumark.com');
+	  ga('send', 'pageview');  	
   </script>
-
 </body>
 
 </html>
