@@ -146,6 +146,7 @@
                     }
                 }
                 else {
+                    formattedAlign += item + '\n';
                     continue;
                 }
             }  
