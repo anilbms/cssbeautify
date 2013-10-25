@@ -27,6 +27,9 @@ function format() {
         if (document.getElementById('autosemicolon').checked) {
             options.autosemicolon = true;
         }
+        if (document.getElementById('alignProperties').checked) {
+            options.alignProperties = true;
+        }
 
         if (typeof editor === undefined) {
             raw = document.getElementById('raw').value;

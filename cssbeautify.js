@@ -37,6 +37,7 @@
             ch, ch2, str, state, State, depth, quote, comment,
             openbracesuffix = true,
             autosemicolon = false,
+            alignProperties = false,
             trimRight;
 
         options = arguments.length > 1 ? opt : {};
@@ -49,7 +50,9 @@
         if (typeof options.autosemicolon === 'boolean') {
             autosemicolon = options.autosemicolon;
         }
-
+        if (typeof options.alignProperties === 'boolean') {
+            alignProperties = options.alignProperties;
+        }
         function isWhitespace(c) {
             return (c === ' ') || (c === '\n') || (c === '\t') || (c === '\r') || (c === '\f');
         }
@@ -105,6 +108,70 @@
             formatted += '}';
             blocks.push(formatted);
             formatted = '';
+        }
+
+        function makeAlign () {
+            var highestLength = 0,
+                beginning = null,
+                ending = null,
+                formattedAlign = "",
+                formattedList = formatted.split('\n'),
+                arrayOfPropValePairs =[];
+
+            for (var i = 0;i < formattedList.length; i++) {
+                var item = formattedList[i];
+                if (item[item.length-1] === '{') {
+                    formattedAlign += item+'\n';
+                    for (var j = i+1; j < formattedList.length; j++ ) {
+                        item = formattedList[j];
+                        if (item[item.length-1]==="}") {
+                            if(arrayOfPropValePairs.length === 1) {
+                                formattedAlign += arrayOfPropValePairs[0] + "\n}\n \n";    
+                            }
+                            else {
+                                formattedAlign += makeAlignPropVale(arrayOfPropValePairs, highestLength) + "}\n \n";    
+                            }
+                            
+                            i = j+1;//got to next line for iteration
+                            arrayOfPropValePairs = []; //reset
+                            highestLength = 0; // reset
+                            break;
+                        }
+                        else {
+                            if (item.indexOf(':') > highestLength) {
+                                highestLength = item.indexOf(':');
+                            }
+                            arrayOfPropValePairs.push(item);
+                        }
+                    }
+                }
+                else {
+                    continue;
+                }
+            }  
+
+            return formattedAlign;          
+        }
+
+        function makeAlignPropVale (arrayOfPropValePairs,highestLength) {
+                arrayOfPropValePairs.forEach(function function_name (text, index, array) {
+                    var numberOfEmptyCharacterToAdd = highestLength - text.indexOf(':');
+                    if (numberOfEmptyCharacterToAdd > 0) {
+                        array[index] = prependEmptyCharacters(numberOfEmptyCharacterToAdd, text);
+                    }
+                });
+                return arrayOfPropValePairs.join('\n')+'\n';
+            }
+
+        function prependEmptyCharacters(num, text) {
+            var i,
+                emptyCharacters = "";
+            for (i = num; i > 0; i -= 1) {
+                emptyCharacters += " ";
+            }
+            emptyCharacters += text;
+
+            return emptyCharacters;
         }
 
         if (String.prototype.trimRight) {
@@ -454,6 +521,10 @@
         }
 
         formatted = blocks.join('') + formatted;
+        
+        if (alignProperties) {
+            formatted = makeAlign();
+        }
 
         return formatted;
     }
